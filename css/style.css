@@ -78,3 +78,12 @@ main blockquote:before {
 main blockquote p {
   display: inline;
 }
+
+.fade {
+    animation: fade 2s;
+}
+
+@keyframes fade {
+    0% {opacity: 0.5}
+    100% {opacity: 1;}
+}
