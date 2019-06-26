@@ -1,14 +1,22 @@
 // on-click version - uncomment below
 // const hero = document.querySelector('.hero-image');
 const heroImg = document.querySelector('.image');
-let images = ['hero-image-0.jpg', 'hero-image-1.jpg', 'hero-image-2.jpg', 'hero-image-3.jpg', 'not-found.jpg'];
-let counter = 1;
+let counter = 0;
 
-changeImg = () => {
-    heroImg.classList.add('fade');
-    heroImg.style.backgroundImage = `url(./images/${images[counter]})`;
-    if (counter < images.length) counter++;
-    if (counter >= images.length) counter = 0;
+changeImg = async () => {
+    let responseStatus;
+    try {
+        const response = await fetch(`./images/hero-image-${[counter]}.jpg`);
+        responseStatus = await response.status;
+        if (responseStatus === 200) {
+            heroImg.style.backgroundImage = `url(./images/hero-image-${[counter]}.jpg)`
+            counter++
+        };
+        if (responseStatus === 404) counter = 0;
+    }
+    catch (e) {
+        alert(e.responseText || "Something went wrong...");
+    }
 }
 
 carousel = () => {
